@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj31bsva4rspo"]
+
+[ext_resource type="PackedScene" uid="uid://2px5aox3l30t" path="res://scenes/avatar.tscn" id="1_g2206"]
+[ext_resource type="Script" path="res://scenes/BlastComponent.gd" id="2_5fatq"]
+[ext_resource type="PackedScene" uid="uid://d17m4i4hevk4i" path="res://scenes/enemy.tscn" id="2_ew064"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Avatar" parent="." instance=ExtResource("1_g2206")]
+position = Vector2(374, 348)
+
+[node name="BlastComponent" type="Node" parent="Avatar" node_paths=PackedStringArray("frequency")]
+script = ExtResource("2_5fatq")
+frequency = NodePath("../../Timer")
+
+[node name="Enemy" parent="." instance=ExtResource("2_ew064")]
+position = Vector2(207, 536)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_ew064")]
+position = Vector2(968, 280)
+DIRECTION = Vector2(-1, 0)
+
+[node name="Enemy3" parent="." instance=ExtResource("2_ew064")]
+position = Vector2(842, 153)
+DIRECTION = Vector2(-1, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.246
