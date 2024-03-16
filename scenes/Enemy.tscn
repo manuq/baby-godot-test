@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://d17m4i4hevk4i"]
+[gd_scene load_steps=23 format=3 uid="uid://d17m4i4hevk4i"]
 
 [ext_resource type="Texture2D" uid="uid://dgct1vlvi1ls" path="res://assets/enemy2/idle_0.png" id="1_mqgnd"]
-[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_wt58s"]
+[ext_resource type="Script" path="res://scenes/Enemy.gd" id="1_wt58s"]
 [ext_resource type="Texture2D" uid="uid://ds5q34xjqclpj" path="res://assets/enemy2/idle_1.png" id="2_874nk"]
 [ext_resource type="Texture2D" uid="uid://crqsoph1oefr5" path="res://assets/enemy2/idle_2.png" id="3_nqaus"]
 [ext_resource type="Texture2D" uid="uid://brvwsag0gbh1q" path="res://assets/enemy2/idle_3.png" id="4_bfj7o"]
@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://cfnd3foj2foiw" path="res://assets/enemy2/walk_6.png" id="13_h7178"]
 [ext_resource type="Texture2D" uid="uid://qj5u3akjdu5p" path="res://assets/enemy2/walk_7.png" id="14_2fjbm"]
 [ext_resource type="Script" path="res://scenes/BlastComponent.gd" id="16_q42ey"]
+[ext_resource type="PackedScene" uid="uid://de8ak4jwjho58" path="res://scenes/EnemyBullet.tscn" id="17_lnccd"]
+[ext_resource type="Script" path="res://scenes/HitComponent.gd" id="17_w5qy6"]
+[ext_resource type="Script" path="res://scenes/HealthComponent.gd" id="19_dgtuu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dcw4a"]
 animations = [{
@@ -75,7 +78,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_lk5jp"]
 radius = 32.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3mx0"]
+size = Vector2(124, 159)
+
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_wt58s")
 
@@ -90,10 +97,24 @@ frame_progress = 0.118727
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lk5jp")
 
-[node name="BlastComponent2" type="Node" parent="." node_paths=PackedStringArray("frequency")]
+[node name="BlastComponent" type="Node" parent="." node_paths=PackedStringArray("frequency")]
 script = ExtResource("16_q42ey")
-frequency = NodePath("../Timer")
+frequency = NodePath("Timer")
+bullet_scene = ExtResource("17_lnccd")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="BlastComponent"]
 wait_time = 0.784
 autostart = true
+
+[node name="HitComponent" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 512
+collision_mask = 4
+script = ExtResource("17_w5qy6")
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitComponent"]
+position = Vector2(0, -42.5)
+shape = SubResource("RectangleShape2D_a3mx0")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("19_dgtuu")

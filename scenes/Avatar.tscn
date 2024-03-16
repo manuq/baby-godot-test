@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://2px5aox3l30t"]
+[gd_scene load_steps=21 format=3 uid="uid://2px5aox3l30t"]
 
 [ext_resource type="Texture2D" uid="uid://cmtd2ky3fi1a4" path="res://assets/char2/idle_0.png" id="1_o87fi"]
-[ext_resource type="Script" path="res://scenes/avatar.gd" id="1_tv67f"]
+[ext_resource type="Script" path="res://scenes/Avatar.gd" id="1_tv67f"]
 [ext_resource type="Texture2D" uid="uid://bde2s6w5n1d6g" path="res://assets/char2/idle_1.png" id="2_jmna6"]
 [ext_resource type="Texture2D" uid="uid://dbwh3hwn1r18o" path="res://assets/char2/idle_2.png" id="3_46k7c"]
 [ext_resource type="Texture2D" uid="uid://5yorb0q47ix8" path="res://assets/char2/idle_3.png" id="4_pv76a"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://byvp4x86tis5b" path="res://assets/char2/walk_5.png" id="12_7yqln"]
 [ext_resource type="Texture2D" uid="uid://20rm48qggk7x" path="res://assets/char2/walk_6.png" id="13_ke3a6"]
 [ext_resource type="Texture2D" uid="uid://dayx6a76qsebb" path="res://assets/char2/walk_7.png" id="14_ncvnl"]
+[ext_resource type="Script" path="res://scenes/HitComponent.gd" id="16_4qyl6"]
+[ext_resource type="Script" path="res://scenes/HealthComponent.gd" id="17_6gicm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4krgd"]
 animations = [{
@@ -74,7 +76,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_n45ys"]
 radius = 32.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5v76"]
+size = Vector2(78, 147)
+
 [node name="Avatar" type="CharacterBody2D"]
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_tv67f")
 
@@ -88,3 +94,17 @@ frame_progress = 0.541126
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_n45ys")
+
+[node name="HitComponent" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 256
+collision_mask = 8
+script = ExtResource("16_4qyl6")
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitComponent"]
+position = Vector2(0, -51.5)
+shape = SubResource("RectangleShape2D_a5v76")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("17_6gicm")
+MAX_HEALTH = 3

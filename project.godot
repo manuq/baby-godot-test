@@ -19,6 +19,15 @@ config/icon="res://icon.png"
 
 window/stretch/mode="viewport"
 
+[layer_names]
+
+2d_physics/layer_1="Avatar"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_3="Avatar bullets"
+2d_physics/layer_4="Enemies bullets"
+2d_physics/layer_9="Avatar hitbox"
+2d_physics/layer_10="Enemies hitbox"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
