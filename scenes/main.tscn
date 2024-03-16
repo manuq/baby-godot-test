@@ -1,32 +1,94 @@
-[gd_scene load_steps=5 format=3 uid="uid://dj31bsva4rspo"]
+[gd_scene load_steps=9 format=3 uid="uid://dj31bsva4rspo"]
 
 [ext_resource type="PackedScene" uid="uid://2px5aox3l30t" path="res://scenes/Avatar.tscn" id="1_g2206"]
-[ext_resource type="Script" path="res://scenes/BlastComponent.gd" id="2_5fatq"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_i4y5d"]
 [ext_resource type="PackedScene" uid="uid://d17m4i4hevk4i" path="res://scenes/Enemy.tscn" id="2_ew064"]
-[ext_resource type="PackedScene" uid="uid://tvugpgg635ta" path="res://scenes/AvatarBullet.tscn" id="3_dwwto"]
+[ext_resource type="PackedScene" uid="uid://c8qyobiuselvo" path="res://scenes/Rock.tscn" id="4_t7bsp"]
+[ext_resource type="PackedScene" uid="uid://cv5xjclv4ntfk" path="res://scenes/MagmaBlock.tscn" id="6_cdp1j"]
+[ext_resource type="PackedScene" uid="uid://b14eyoj7w5vsk" path="res://scenes/HealthPowerup.tscn" id="7_02g5w"]
+[ext_resource type="PackedScene" uid="uid://c4n1nbff8edc4" path="res://scenes/IceBlock.tscn" id="7_dgtcl"]
+
+[sub_resource type="Theme" id="Theme_f7rgl"]
+default_font_size = 24
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
+position = Vector2(0, 29)
+script = ExtResource("1_i4y5d")
 
 [node name="Avatar" parent="." instance=ExtResource("1_g2206")]
-position = Vector2(374, 348)
-
-[node name="BlastComponent" type="Node" parent="Avatar" node_paths=PackedStringArray("frequency")]
-script = ExtResource("2_5fatq")
-frequency = NodePath("Timer")
-bullet_scene = ExtResource("3_dwwto")
-
-[node name="Timer" type="Timer" parent="Avatar/BlastComponent"]
-wait_time = 0.246
-autostart = true
+position = Vector2(150, 355)
+wall_min_slide_angle = 0.0872665
 
 [node name="Enemy" parent="." instance=ExtResource("2_ew064")]
-position = Vector2(207, 536)
+position = Vector2(454, 509)
+scout = true
+scout_length = 200
 
 [node name="Enemy2" parent="." instance=ExtResource("2_ew064")]
-position = Vector2(968, 280)
-DIRECTION = Vector2(-1, 0)
+position = Vector2(968, 345)
+direction = 0
 
 [node name="Enemy3" parent="." instance=ExtResource("2_ew064")]
 position = Vector2(842, 153)
-DIRECTION = Vector2(-1, 0)
+scout = true
+scout_length = 200
+direction = 0
+
+[node name="Rock" parent="." instance=ExtResource("4_t7bsp")]
+position = Vector2(893, 588)
+
+[node name="Rock2" parent="." instance=ExtResource("4_t7bsp")]
+position = Vector2(1006, 448)
+asset_variant = 1
+
+[node name="Rock3" parent="." instance=ExtResource("4_t7bsp")]
+position = Vector2(234, 143)
+asset_variant = 2
+
+[node name="IceBlock" parent="." instance=ExtResource("7_dgtcl")]
+position = Vector2(817, 456)
+
+[node name="IceBlock2" parent="." instance=ExtResource("7_dgtcl")]
+position = Vector2(718, 370)
+
+[node name="IceBlock3" parent="." instance=ExtResource("7_dgtcl")]
+position = Vector2(849, 301)
+
+[node name="MagmaBlock" parent="." instance=ExtResource("6_cdp1j")]
+position = Vector2(100, 577)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_f7rgl")
+
+[node name="LivesLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "lives: 3"
+
+[node name="BlastLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "blaster: ∞"
+
+[node name="HealthPowerup" parent="." instance=ExtResource("7_02g5w")]
+position = Vector2(1064, 560)
+
+[node name="HealthPowerup2" parent="." instance=ExtResource("7_02g5w")]
+position = Vector2(401, 350)
+
+[connection signal="lives_changed" from="Avatar" to="." method="_on_avatar_lives_changed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://2px5aox3l30t"]
+[gd_scene load_steps=29 format=3 uid="uid://2px5aox3l30t"]
 
 [ext_resource type="Texture2D" uid="uid://cmtd2ky3fi1a4" path="res://assets/char2/idle_0.png" id="1_o87fi"]
 [ext_resource type="Script" path="res://scenes/Avatar.gd" id="1_tv67f"]
@@ -15,8 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://byvp4x86tis5b" path="res://assets/char2/walk_5.png" id="12_7yqln"]
 [ext_resource type="Texture2D" uid="uid://20rm48qggk7x" path="res://assets/char2/walk_6.png" id="13_ke3a6"]
 [ext_resource type="Texture2D" uid="uid://dayx6a76qsebb" path="res://assets/char2/walk_7.png" id="14_ncvnl"]
-[ext_resource type="Script" path="res://scenes/HitComponent.gd" id="16_4qyl6"]
-[ext_resource type="Script" path="res://scenes/HealthComponent.gd" id="17_6gicm"]
+[ext_resource type="Script" path="res://classes/Hitbox.gd" id="16_4qyl6"]
+[ext_resource type="Script" path="res://classes/Health.gd" id="17_6gicm"]
+[ext_resource type="Script" path="res://classes/Blast.gd" id="18_v2jc7"]
+[ext_resource type="PackedScene" uid="uid://tvugpgg635ta" path="res://scenes/AvatarBullet.tscn" id="19_18xrl"]
+[ext_resource type="AudioStream" uid="uid://by2powjpy2h1r" path="res://assets/explosionCrunch_000.ogg" id="20_06l38"]
+[ext_resource type="AudioStream" uid="uid://bnw2n12q588y" path="res://assets/laserRetro_004.ogg" id="21_h41j6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5v76"]
+size = Vector2(78, 147)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4krgd"]
 animations = [{
@@ -76,15 +83,80 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_n45ys"]
 radius = 32.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5v76"]
-size = Vector2(78, 147)
+[sub_resource type="Animation" id="Animation_tsqbh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1ajf0"]
+resource_name = "heal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(4, 4, 4, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c42ir"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(4, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5xv08"]
+_data = {
+"RESET": SubResource("Animation_tsqbh"),
+"heal": SubResource("Animation_1ajf0"),
+"hit": SubResource("Animation_c42ir")
+}
 
 [node name="Avatar" type="CharacterBody2D"]
-collision_mask = 2
+collision_mask = 18
 motion_mode = 1
+wall_min_slide_angle = 0.698132
 script = ExtResource("1_tv67f")
+speed = 1000.0
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health", "blast")]
+position = Vector2(0, 1)
+collision_layer = 256
+collision_mask = 552
+script = ExtResource("16_4qyl6")
+health = NodePath("../Health")
+blast = NodePath("../Blast")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -51.5)
+shape = SubResource("RectangleShape2D_a5v76")
+debug_color = Color(0.945098, 0, 0.588235, 0.419608)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -161)
 scale = Vector2(0.256614, 0.256614)
 sprite_frames = SubResource("SpriteFrames_4krgd")
@@ -95,16 +167,37 @@ frame_progress = 0.541126
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_n45ys")
 
-[node name="HitComponent" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 256
-collision_mask = 8
-script = ExtResource("16_4qyl6")
-health = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitComponent"]
-position = Vector2(0, -51.5)
-shape = SubResource("RectangleShape2D_a5v76")
-
-[node name="HealthComponent" type="Node" parent="."]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("recovering_timer")]
+unique_name_in_owner = true
 script = ExtResource("17_6gicm")
-MAX_HEALTH = 3
+max_health = 3
+recovering_timer = NodePath("RecoveryTimer")
+
+[node name="RecoveryTimer" type="Timer" parent="Health"]
+one_shot = true
+
+[node name="Blast" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("18_v2jc7")
+bullet_scene = ExtResource("19_18xrl")
+
+[node name="FrequencyTimer" type="Timer" parent="Blast"]
+unique_name_in_owner = true
+wait_time = 0.246
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("20_06l38")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("21_h41j6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_5xv08")
+}
+
+[connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]

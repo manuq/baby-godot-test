@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv5xjclv4ntfk"]
+
+[ext_resource type="Texture2D" uid="uid://bv1gbkxwodvei" path="res://assets/magma.png" id="2_48cli"]
+[ext_resource type="Script" path="res://classes/Hitbox.gd" id="3_dniep"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ri5b6"]
+radius = 437.104
+height = 1435.28
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gtxj"]
+size = Vector2(1432.88, 1231.93)
+
+[node name="MagmaBlock" type="StaticBody2D"]
+scale = Vector2(0.114455, 0.114455)
+collision_layer = 16
+collision_mask = 0
+
+[node name="Ice-block" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.858824)
+position = Vector2(13.2416, -375.901)
+texture = ExtResource("2_48cli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.00025177, -244.638)
+rotation = -1.57079
+scale = Vector2(0.919, 0.919)
+shape = SubResource("CapsuleShape2D_ri5b6")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 528
+collision_mask = 4
+script = ExtResource("3_dniep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(8.73707, -283.954)
+shape = SubResource("RectangleShape2D_4gtxj")
+debug_color = Color(0.8, 0.419608, 0, 0.419608)

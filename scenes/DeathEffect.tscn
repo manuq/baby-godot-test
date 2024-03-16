@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://csurfo1115pg3"]
+
+[ext_resource type="Script" path="res://scenes/DeathEffect.gd" id="1_ei1d1"]
+[ext_resource type="Texture2D" uid="uid://cl1lmgualurpt" path="res://assets/death/death_0.png" id="1_osx3l"]
+[ext_resource type="Texture2D" uid="uid://gatdkyc6npbc" path="res://assets/death/death_1.png" id="2_llll5"]
+[ext_resource type="Texture2D" uid="uid://ckbrvv7fdcioc" path="res://assets/death/death_2.png" id="3_wb5lj"]
+[ext_resource type="AudioStream" uid="uid://dl5btrtm4i5qe" path="res://assets/explosionCrunch_001.ogg" id="4_kwkta"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h7dxa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_osx3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_llll5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wb5lj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="DeathEffect" type="Node2D"]
+script = ExtResource("1_ei1d1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -76)
+scale = Vector2(0.284439, 0.284439)
+sprite_frames = SubResource("SpriteFrames_h7dxa")
+autoplay = "default"
+frame = 1
+frame_progress = 0.258536
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kwkta")
+autoplay = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

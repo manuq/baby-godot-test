@@ -1,24 +1,29 @@
 [gd_scene load_steps=5 format=3 uid="uid://tvugpgg635ta"]
 
-[ext_resource type="Script" path="res://scenes/EnemyBullet.gd" id="1_roqdk"]
-[ext_resource type="Texture2D" uid="uid://dwb2eradb45e8" path="res://assets/bullet.png" id="2_neyam"]
+[ext_resource type="Script" path="res://scenes/Bullet.gd" id="1_78cbg"]
+[ext_resource type="Texture2D" uid="uid://c4453oxd5adlc" path="res://assets/bullet2.png" id="2_5ta6w"]
 [ext_resource type="AudioStream" uid="uid://dgle8a6qje6f5" path="res://assets/laserSmall_001.ogg" id="3_hebdo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kc7ic"]
 radius = 44.09
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="AvatarBullet" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 512
+collision_mask = 16
 motion_mode = 1
-script = ExtResource("1_roqdk")
+script = ExtResource("1_78cbg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kc7ic")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.08292, 0.08292)
-texture = ExtResource("2_neyam")
+texture = ExtResource("2_5ta6w")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_hebdo")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(3.2, 3.2)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
