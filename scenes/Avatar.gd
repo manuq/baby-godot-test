@@ -46,9 +46,9 @@ func _physics_process(delta):
 	else:
 		var axis = _get_axis(velocity)
 		if not Input.is_action_pressed("ui_select"):
-			%Blast.direction = axis
-		elif _is_flipped_axis(axis, _get_axis(%Blast.direction)):
-			%Blast.direction = axis
+			%Blast.direction = axis.angle()
+		elif _is_flipped_axis(axis, _get_axis(Vector2.RIGHT.rotated(%Blast.direction))):
+			%Blast.direction = axis.angle()
 		if velocity.x != 0:
 			%AnimatedSprite2D.flip_h = velocity.x < 0
 		%AnimatedSprite2D.animation = 'walk'

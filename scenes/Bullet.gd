@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Bullet
 
 @export var speed = 3000.0
-@export var direction = Vector2(1, 0)
+@export_range(-360, 360, 0.1, "radians_as_degrees") var direction: float
 
 
 func _ready():
@@ -15,7 +15,7 @@ func _physics_process(delta):
 		await get_tree().create_timer(0.1).timeout
 		queue_free()
 
-	velocity = direction.normalized() * speed
+	velocity = Vector2.RIGHT.rotated(direction) * speed
 	move_and_slide()
 
 

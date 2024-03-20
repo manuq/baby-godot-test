@@ -6,16 +6,17 @@
 class_name Blast extends Node
 
 ## Where to blast.
-@export var direction: Vector2
+@export_range(-360, 360, 0.1, "radians_as_degrees") var direction: float
+
 
 ## The default direction if none is set and character is not moving:
-const DEFAULT_DIRECTION = Vector2(1, 0)
+const DEFAULT_DIRECTION = 0.0
 
 ## If set, overrides the bullet speed.
 @export var bullet_speed: float
 
 ## This is the bullet.
-@export var bullet_scene: PackedScene:
+@export var bullet_scene: PackedScene: # Bullet
 	set = set_bullet_scene
 
 var _frequency: Timer
@@ -40,6 +41,7 @@ func _try_set_frequency(_node):
 func _try_unset_frequency(node):
 	if _frequency == node:
 		_frequency = null
+		update_configuration_warnings()
 
 func _init():
 	child_entered_tree.connect(_try_set_frequency)
@@ -48,8 +50,8 @@ func _init():
 
 func _get_configuration_warnings():
 	var warnings = []
-	if not get_parent() is CharacterBody2D:
-		warnings.append("You can only add blast to CharacterBody2D nodes.")
+	if not get_parent() is Node2D:
+		warnings.append("You can only add blast to Node2D nodes.")
 	if not _frequency:
 		warnings.append("You must add a timer as children for the blast frequency.")
 	if not bullet_scene:
@@ -61,7 +63,7 @@ func _on_timer_timeout():
 
 ## Call this to blast manually.
 func do_blast():
-	if not bullet_scene: # or not bullet_scene.is_class("Bullet"):
+	if not bullet_scene: # or not bullet_scene is Bullet:
 		return
 	var instance = bullet_scene.instantiate()
 	if bullet_speed:
@@ -69,9 +71,10 @@ func do_blast():
 
 	if direction:
 		instance.direction = direction
-	elif get_parent().velocity != Vector2.ZERO:
-		instance.direction = get_parent().velocity
+	elif get_parent() is CharacterBody2D and get_parent().velocity != Vector2.ZERO:
+		instance.direction = get_parent().velocity.angle()
 	else:
+		# instance.direction = Vector2.RIGHT.rotated(get_parent().rotation)
 		instance.direction = DEFAULT_DIRECTION
 	instance.position = get_parent().global_position
 	get_tree().root.add_child(instance)

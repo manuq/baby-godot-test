@@ -1,3 +1,7 @@
+## Testing custom nodes and composition in Godot
+
+![Composition](docs/composition.png)
+
 ## Royality free assets:
 - [characters and rocks](https://rgsdev.itch.io/free-cc0-modular-animated-vector-characters-2d): CC0
 - [Sound effects](https://kenney.nl/assets/sci-fi-sounds): CC0
