@@ -42,7 +42,7 @@ func _ready():
 
 	%AnimatedSprite2D.flip_h = _direction.x < 0
 	if _blast:
-		_blast.direction = _direction
+		_blast.direction = _direction.angle()
 	if _health:
 		_health.connect("died", _on_health_died)
 		_health.connect("health_changed", _on_health_health_changed)
@@ -54,7 +54,7 @@ func _physics_process(delta):
 		if (_reference_position - position).length_squared() > _scout_length_squared:
 			_direction = _direction.rotated(PI)
 			if _blast:
-				_blast.direction = _direction
+				_blast.direction = _direction.angle()
 		velocity = _direction * speed
 
 	if velocity == Vector2.ZERO:

@@ -1,9 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpgd1ujxqvgyi"]
+[gd_scene load_steps=4 format=3 uid="uid://cpgd1ujxqvgyi"]
 
 [ext_resource type="PackedScene" uid="uid://2px5aox3l30t" path="res://scenes/Avatar.tscn" id="1_0guj1"]
+[ext_resource type="Script" path="res://classes/Blast.gd" id="3_ewjgc"]
+[ext_resource type="PackedScene" uid="uid://de8ak4jwjho58" path="res://scenes/EnemyBullet.tscn" id="4_wbwjp"]
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Avatar" parent="." instance=ExtResource("1_0guj1")]
 position = Vector2(216, 251)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(670, 319)
+rotation = 2.51327
+
+[node name="Blast" type="Node" parent="Node2D"]
+script = ExtResource("3_ewjgc")
+bullet_scene = ExtResource("4_wbwjp")
+
+[node name="Timer" type="Timer" parent="Node2D/Blast"]
+autostart = true

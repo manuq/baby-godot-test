@@ -33,7 +33,7 @@ func _ready():
 func _on_body_entered(body):
 	## This is when a bullet body enters.
 	body.queue_free()
-	do_hit()
+	_do_hit()
 
 
 func _on_area_entered(area):
@@ -44,8 +44,8 @@ func _on_area_entered(area):
 			return
 		else:
 			return
-	do_hit()
+	_do_hit()
 
 
-func do_hit():
+func _do_hit():
 	got_hit.emit()
