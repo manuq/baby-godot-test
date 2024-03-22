@@ -3,7 +3,7 @@
 @icon("res://classes/Blast.svg")
 
 ## You can now blast!
-class_name Blast extends Node
+class_name Blast extends Node2D
 
 ## Where to blast.
 @export_range(-360, 360, 0.1, "radians_as_degrees") var direction: float
@@ -58,6 +58,15 @@ func _get_configuration_warnings():
 		warnings.append("You must setup a bullet scene.")
 	return warnings
 
+func _process(delta):
+	pass
+	#if Engine.is_editor_hint():
+		#queue_redraw()
+
+func _draw():
+	if Engine.is_editor_hint():
+		draw_colored_polygon(PackedVector2Array([Vector2(0, 0), Vector2(64, -64), Vector2(104, -32), Vector2(192, 0), Vector2(104, 32), Vector2(64, 64)]), Color("#ff0000", 0.2))
+
 func _on_timer_timeout():
 	do_blast()
 
@@ -70,11 +79,11 @@ func do_blast():
 		instance.speed = bullet_speed
 
 	if direction:
-		instance.direction = direction
+		instance.direction = direction + global_rotation
 	elif get_parent() is CharacterBody2D and get_parent().velocity != Vector2.ZERO:
-		instance.direction = get_parent().velocity.angle()
+		instance.direction = get_parent().velocity.angle() + global_rotation
 	else:
 		# instance.direction = Vector2.RIGHT.rotated(get_parent().rotation)
-		instance.direction = DEFAULT_DIRECTION
-	instance.position = get_parent().global_position
+		instance.direction = DEFAULT_DIRECTION + global_rotation
+	instance.position = get_parent().global_position + position
 	get_tree().root.add_child(instance)
