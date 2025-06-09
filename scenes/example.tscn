@@ -1,10 +1,25 @@
 [gd_scene load_steps=9 format=3 uid="uid://o3xbmp7bug7q"]
 
-[ext_resource type="PackedScene" uid="uid://2px5aox3l30t" path="res://scenes/Avatar.tscn" id="1_rkrjr"]
-[ext_resource type="Script" path="res://classes/Blast.gd" id="2_pfm7y"]
-[ext_resource type="PackedScene" uid="uid://de8ak4jwjho58" path="res://scenes/EnemyBullet.tscn" id="3_wkhy4"]
-[ext_resource type="PackedScene" uid="uid://cv5xjclv4ntfk" path="res://scenes/MagmaBlock.tscn" id="4_hddry"]
-[ext_resource type="PackedScene" uid="uid://c4n1nbff8edc4" path="res://scenes/IceBlock.tscn" id="5_yygjt"]
+[ext_resource type="PackedScene" uid="uid://2px5aox3l30t" path="res://scenes/avatar.tscn" id="1_rkrjr"]
+[ext_resource type="Script" uid="uid://c5awepm05aq04" path="res://classes/blast.gd" id="2_pfm7y"]
+[ext_resource type="PackedScene" uid="uid://de8ak4jwjho58" path="res://scenes/enemy_bullet.tscn" id="3_wkhy4"]
+[ext_resource type="PackedScene" uid="uid://cv5xjclv4ntfk" path="res://scenes/magma_block.tscn" id="4_hddry"]
+[ext_resource type="PackedScene" uid="uid://c4n1nbff8edc4" path="res://scenes/ice_block.tscn" id="5_yygjt"]
+
+[sub_resource type="Animation" id="Animation_4mp12"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_7x6jx"]
 resource_name = "rotate"
@@ -23,25 +38,10 @@ tracks/0/keys = {
 "values": [0.0, 6.28319]
 }
 
-[sub_resource type="Animation" id="Animation_4mp12"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n1iyn"]
 _data = {
-"RESET": SubResource("Animation_4mp12"),
-"rotate": SubResource("Animation_7x6jx")
+&"RESET": SubResource("Animation_4mp12"),
+&"rotate": SubResource("Animation_7x6jx")
 }
 
 [node name="Node2D" type="Node2D"]
@@ -94,7 +94,7 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
 libraries = {
-"": SubResource("AnimationLibrary_n1iyn")
+&"": SubResource("AnimationLibrary_n1iyn")
 }
 autoplay = "rotate"
 

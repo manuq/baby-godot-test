@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ingba2dr02df"
-path="res://.godot/imported/Hitbox.svg-16703d959afd0496d5e4af7b698b178e.ctex"
+uid="uid://uf6k5xiqhnp5"
+path="res://.godot/imported/health.svg-51301ed698a8caabb1233ffb47a673b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://classes/Hitbox.svg"
-dest_files=["res://.godot/imported/Hitbox.svg-16703d959afd0496d5e4af7b698b178e.ctex"]
+source_file="res://classes/health.svg"
+dest_files=["res://.godot/imported/health.svg-51301ed698a8caabb1233ffb47a673b3.ctex"]
 
 [params]
 

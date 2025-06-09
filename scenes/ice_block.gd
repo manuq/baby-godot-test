@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 
-const  death_effect_scene = preload("res://scenes/DeathEffect.tscn")
+const  death_effect_scene = preload("uid://csurfo1115pg3")
 
 
 func _on_health_died():

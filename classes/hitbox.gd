@@ -1,6 +1,6 @@
 @tool
 
-@icon("res://classes/Hitbox.svg")
+@icon("uid://ingba2dr02df")
 
 ## Avoid getting hit!
 class_name Hitbox extends Area2D

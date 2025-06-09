@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://dj31bsva4rspo"]
 
-[ext_resource type="PackedScene" uid="uid://2px5aox3l30t" path="res://scenes/Avatar.tscn" id="1_g2206"]
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_i4y5d"]
-[ext_resource type="PackedScene" uid="uid://d17m4i4hevk4i" path="res://scenes/Enemy.tscn" id="2_ew064"]
-[ext_resource type="PackedScene" uid="uid://c8qyobiuselvo" path="res://scenes/Rock.tscn" id="4_t7bsp"]
-[ext_resource type="PackedScene" uid="uid://cv5xjclv4ntfk" path="res://scenes/MagmaBlock.tscn" id="6_cdp1j"]
-[ext_resource type="PackedScene" uid="uid://b14eyoj7w5vsk" path="res://scenes/HealthPowerup.tscn" id="7_02g5w"]
-[ext_resource type="PackedScene" uid="uid://c4n1nbff8edc4" path="res://scenes/IceBlock.tscn" id="7_dgtcl"]
+[ext_resource type="PackedScene" uid="uid://2px5aox3l30t" path="res://scenes/avatar.tscn" id="1_g2206"]
+[ext_resource type="Script" uid="uid://6ebac40v6pif" path="res://scenes/main.gd" id="1_i4y5d"]
+[ext_resource type="PackedScene" uid="uid://d17m4i4hevk4i" path="res://scenes/enemy.tscn" id="2_ew064"]
+[ext_resource type="PackedScene" uid="uid://c8qyobiuselvo" path="res://scenes/rock.tscn" id="4_t7bsp"]
+[ext_resource type="PackedScene" uid="uid://cv5xjclv4ntfk" path="res://scenes/magma_block.tscn" id="6_cdp1j"]
+[ext_resource type="PackedScene" uid="uid://b14eyoj7w5vsk" path="res://scenes/health_powerup.tscn" id="7_02g5w"]
+[ext_resource type="PackedScene" uid="uid://c4n1nbff8edc4" path="res://scenes/ice_block.tscn" id="7_dgtcl"]
 
 [sub_resource type="Theme" id="Theme_f7rgl"]
 default_font_size = 24

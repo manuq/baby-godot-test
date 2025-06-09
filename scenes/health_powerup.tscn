@@ -1,6 +1,6 @@
 [gd_scene load_steps=65 format=3 uid="uid://b14eyoj7w5vsk"]
 
-[ext_resource type="Script" path="res://scenes/HealthPowerup.gd" id="1_fthm5"]
+[ext_resource type="Script" uid="uid://b6ue3q7ilac1g" path="res://scenes/HealthPowerup.gd" id="1_fthm5"]
 [ext_resource type="Texture2D" uid="uid://2hm8urg7urau" path="res://assets/Effect_EldenRing_1_421x425.png" id="1_kmpni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8q6u0"]

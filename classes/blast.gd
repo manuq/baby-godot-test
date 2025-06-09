@@ -1,6 +1,6 @@
 @tool
 
-@icon("res://classes/Blast.svg")
+@icon("uid://cq40qa7ppj7cf")
 
 ## You can now blast!
 class_name Blast extends Node2D

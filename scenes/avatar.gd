@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 signal lives_changed(value: int)
 
-const  death_effect_scene = preload("res://scenes/DeathEffect.tscn")
+const  death_effect_scene = preload("uid://csurfo1115pg3")
 
 
 func _get_axis(v: Vector2):
@@ -56,7 +56,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_health_died():
+func _on_defeated():
 	var instance = death_effect_scene.instantiate()
 	instance.position = position
 	add_sibling(instance)

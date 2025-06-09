@@ -10,7 +10,7 @@ enum Direction {LEFT, RIGHT, UP, DOWN}
 @export var direction : Direction = Direction.RIGHT:
 	set = set_direction
 
-const  death_effect_scene = preload("res://scenes/DeathEffect.tscn")
+const  death_effect_scene = preload("uid://csurfo1115pg3")
 
 var _direction: Vector2
 var _reference_position: Vector2
@@ -44,7 +44,7 @@ func _ready():
 	if _blast:
 		_blast.direction = _direction.angle()
 	if _health:
-		_health.connect("died", _on_health_died)
+		_health.defeated.connect(_on_defeated)
 		_health.connect("health_changed", _on_health_health_changed)
 	if scout:
 		_reference_position = position
@@ -67,7 +67,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_health_died():
+func _on_defeated():
 	var instance = death_effect_scene.instantiate()
 	instance.position = position
 	add_sibling(instance)

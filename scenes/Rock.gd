@@ -8,4 +8,3 @@ func set_rock(value):
 		i.visible = false
 	%Assets.get_child(value).visible = true
 	notify_property_list_changed()
-

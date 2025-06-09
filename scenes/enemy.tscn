@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://d17m4i4hevk4i"]
 
 [ext_resource type="Texture2D" uid="uid://dgct1vlvi1ls" path="res://assets/enemy2/idle_0.png" id="1_mqgnd"]
-[ext_resource type="Script" path="res://scenes/Enemy.gd" id="1_wt58s"]
+[ext_resource type="Script" uid="uid://c35ennftavisu" path="res://scenes/enemy.gd" id="1_wt58s"]
 [ext_resource type="Texture2D" uid="uid://ds5q34xjqclpj" path="res://assets/enemy2/idle_1.png" id="2_874nk"]
 [ext_resource type="Texture2D" uid="uid://crqsoph1oefr5" path="res://assets/enemy2/idle_2.png" id="3_nqaus"]
 [ext_resource type="Texture2D" uid="uid://brvwsag0gbh1q" path="res://assets/enemy2/idle_3.png" id="4_bfj7o"]
@@ -15,10 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://cswep2nhi62n0" path="res://assets/enemy2/walk_5.png" id="12_40rck"]
 [ext_resource type="Texture2D" uid="uid://cfnd3foj2foiw" path="res://assets/enemy2/walk_6.png" id="13_h7178"]
 [ext_resource type="Texture2D" uid="uid://qj5u3akjdu5p" path="res://assets/enemy2/walk_7.png" id="14_2fjbm"]
-[ext_resource type="Script" path="res://classes/Blast.gd" id="16_q42ey"]
-[ext_resource type="Script" path="res://classes/Hitbox.gd" id="17_w5qy6"]
-[ext_resource type="PackedScene" uid="uid://de8ak4jwjho58" path="res://scenes/EnemyBullet.tscn" id="18_kw662"]
-[ext_resource type="Script" path="res://classes/Health.gd" id="19_dgtuu"]
+[ext_resource type="Script" uid="uid://c5awepm05aq04" path="res://classes/blast.gd" id="16_q42ey"]
+[ext_resource type="Script" uid="uid://23o5kqxmlacj" path="res://classes/hitbox.gd" id="17_w5qy6"]
+[ext_resource type="PackedScene" uid="uid://de8ak4jwjho58" path="res://scenes/enemy_bullet.tscn" id="18_kw662"]
+[ext_resource type="Script" uid="uid://b8dce4cplkjj0" path="res://classes/health.gd" id="19_dgtuu"]
 [ext_resource type="AudioStream" uid="uid://by2powjpy2h1r" path="res://assets/explosionCrunch_000.ogg" id="20_0wijd"]
 [ext_resource type="Texture2D" uid="uid://bfpc74m4r3afw" path="res://assets/progress-red.png" id="21_8ceru"]
 [ext_resource type="Texture2D" uid="uid://0qqcmik7b5w0" path="res://assets/progress-green.png" id="22_47g1t"]
@@ -117,8 +117,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5xv08"]
 _data = {
-"RESET": SubResource("Animation_tsqbh"),
-"hit": SubResource("Animation_c42ir")
+&"RESET": SubResource("Animation_tsqbh"),
+&"hit": SubResource("Animation_c42ir")
 }
 
 [node name="Enemy" type="CharacterBody2D"]
@@ -171,7 +171,7 @@ stream = ExtResource("20_0wijd")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_5xv08")
+&"": SubResource("AnimationLibrary_5xv08")
 }
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]

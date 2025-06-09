@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://de8ak4jwjho58"]
 
-[ext_resource type="Script" path="res://scenes/Bullet.gd" id="1_amway"]
+[ext_resource type="Script" uid="uid://d1ly2qsj2nx2x" path="res://scenes/Bullet.gd" id="1_amway"]
 [ext_resource type="Texture2D" uid="uid://dwb2eradb45e8" path="res://assets/bullet.png" id="2_h7bxw"]
 [ext_resource type="AudioStream" uid="uid://xwk43dypigmi" path="res://assets/laserSmall_002.ogg" id="3_44oex"]
 

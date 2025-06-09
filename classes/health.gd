@@ -1,12 +1,12 @@
 @tool
 
-@icon("res://classes/Health.svg")
+@icon("uid://uf6k5xiqhnp5")
 
 ## Take care of your health!
 class_name Health extends Node
 
-## This is emited when you die.
-signal died
+## This is emited when health reaches zero.
+signal defeated
 
 ## This is emited when the health changes.
 signal health_changed(value: int)
@@ -43,5 +43,5 @@ func got_hit():
 	if recovering_timer:
 		recovering_timer.start()
 	if _health == 0:
-		died.emit()
+		defeated.emit()
 		get_parent().queue_free()

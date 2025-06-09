@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq40qa7ppj7cf"
-path="res://.godot/imported/Blast.svg-39527f77d2a86940900428381606db8a.ctex"
+uid="uid://ingba2dr02df"
+path="res://.godot/imported/hitbox.svg-9e54d6ae4126588f23ec450f9aa342e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://classes/Blast.svg"
-dest_files=["res://.godot/imported/Blast.svg-39527f77d2a86940900428381606db8a.ctex"]
+source_file="res://classes/hitbox.svg"
+dest_files=["res://.godot/imported/hitbox.svg-9e54d6ae4126588f23ec450f9aa342e9.ctex"]
 
 [params]
 

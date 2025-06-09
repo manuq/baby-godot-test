@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://c4n1nbff8edc4"]
 
-[ext_resource type="Script" path="res://scenes/IceBlock.gd" id="1_jqgn2"]
+[ext_resource type="Script" uid="uid://djccyd3di5u0u" path="res://scenes/ice_block.gd" id="1_jqgn2"]
 [ext_resource type="Texture2D" uid="uid://6scq4jhssgkn" path="res://assets/ice-block.png" id="1_sutf7"]
-[ext_resource type="Script" path="res://classes/Hitbox.gd" id="2_ebhek"]
-[ext_resource type="Script" path="res://classes/Health.gd" id="3_lrvbp"]
+[ext_resource type="Script" uid="uid://23o5kqxmlacj" path="res://classes/hitbox.gd" id="2_ebhek"]
+[ext_resource type="Script" uid="uid://b8dce4cplkjj0" path="res://classes/health.gd" id="3_lrvbp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ri5b6"]
 radius = 437.104
@@ -45,8 +45,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_62jwy"]
 _data = {
-"RESET": SubResource("Animation_17s2b"),
-"hit": SubResource("Animation_1ur11")
+&"RESET": SubResource("Animation_17s2b"),
+&"hit": SubResource("Animation_1ur11")
 }
 
 [node name="IceBlock" type="StaticBody2D"]
@@ -83,8 +83,7 @@ script = ExtResource("3_lrvbp")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_62jwy")
+&"": SubResource("AnimationLibrary_62jwy")
 }
 
-[connection signal="died" from="Health" to="." method="_on_health_died"]
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cv5xjclv4ntfk"]
 
 [ext_resource type="Texture2D" uid="uid://bv1gbkxwodvei" path="res://assets/magma.png" id="2_48cli"]
-[ext_resource type="Script" path="res://classes/Hitbox.gd" id="3_dniep"]
+[ext_resource type="Script" uid="uid://23o5kqxmlacj" path="res://classes/hitbox.gd" id="3_dniep"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ri5b6"]
 radius = 437.104
